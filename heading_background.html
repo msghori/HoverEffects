@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hover Background Effect</title>
+  <style type="text/css">
+    /* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+ /* width: 100%;
+  max-width: 800px;*/
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: tan;
+  z-index: 0;
+}
+.list-holder{
+  background: white;
+  position: relative;
+    position: relative;
+    top: 50%;
+}
+.heading-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+}
+
+/*.heading-list li {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}*/
+.heading-list li {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ccc;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.heading-list li:hover {
+  color: #000;
+}
+
+/*.background-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}*/
+
+
+
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;  /* Set to your desired image size */
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  pointer-events: none;  /* So it doesn't interfere with mouse events */
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+/*#demo {
+    height: 100%;
+    width: 100%;
+    background-color: #222831;
+}
+
+#info {
+    padding-left: 10px;
+    border-radius: 10px;
+    position: absolute;
+    user-select: none;
+    font-size: 2em;
+    width: 120px;
+    color: #EEEEEE;
+    background-color: #FD7013;
+}
+*/
+  </style>
+</head>
+<body>
+  <div class="container" >
+  <div class=" background-image"  id="backgroundImage">
+
+    <div class="list-holder">
+    <ul class="heading-list">
+      <li data-image="images/1.jpg">BRANDING</li>
+      <li data-image="images/2.jpg">UX/UI</li>
+      <li data-image="images/3.jpg">DIGITAL</li>
+      <li data-image="images/4.jpg">PRINT</li>
+      <li data-image="images/5.jpg">DESIGN</li>
+    </ul>
+    <!-- <div class="background-image" id="backgroundImage"></div> -->
+  </div>
+  </div>
+
+  <script type="text/javascript">
+    // script.js
+document.querySelectorAll('.heading-list li').forEach(item => {
+  item.addEventListener('mouseover', () => {
+    const imageSrc = item.getAttribute('data-image');
+    const backgroundImageDiv = document.getElementById('backgroundImage');
+    backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+    backgroundImageDiv.style.opacity = '1';
+  });
+
+  item.addEventListener('mouseout', () => {
+    const backgroundImageDiv = document.getElementById('backgroundImage');
+    backgroundImageDiv.style.opacity = '0';
+  });
+});
+    // ========================================================================
+// document.querySelectorAll('.heading-list li').forEach(item => {
+//   item.addEventListener('mouseover', () => {
+//     const imageSrc = item.getAttribute('data-image');
+//     const position = item.getAttribute('data-position');
+//     const backgroundImageDiv = document.getElementById('backgroundImage');
+    
+//     backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+//     backgroundImageDiv.style.opacity = '1';
+    
+//     // Adjust position based on `data-position`
+//     switch (position) {
+//       case 'top left':
+//         backgroundImageDiv.style.top = '10%';
+//         backgroundImageDiv.style.left = '10%';
+//         break;
+//       case 'top right':
+//         backgroundImageDiv.style.top = '10%';
+//         backgroundImageDiv.style.left = '70%';
+//         break;
+//       case 'center center':
+//         backgroundImageDiv.style.top = '50%';
+//         backgroundImageDiv.style.left = '50%';
+//         break;
+//       case 'bottom left':
+//         backgroundImageDiv.style.top = '70%';
+//         backgroundImageDiv.style.left = '10%';
+//         break;
+//       case 'bottom right':
+//         backgroundImageDiv.style.top = '70%';
+//         backgroundImageDiv.style.left = '70%';
+//         break;
+//       default:
+//         backgroundImageDiv.style.top = '50%';
+//         backgroundImageDiv.style.left = '50%';
+//     }
+
+//     backgroundImageDiv.style.transform = 'translate(-50%, -50%)';
+//   });
+
+//   item.addEventListener('mouseout', () => {
+//     const backgroundImageDiv = document.getElementById('backgroundImage');
+//     backgroundImageDiv.style.opacity = '0';
+//   });
+// });
+// =========================================================
+//     const backgroundImageDiv = document.getElementById('backgroundImage');
+
+// document.querySelectorAll('.heading-list li').forEach(item => {
+//   item.addEventListener('mouseover', (event) => {
+//     const imageSrc = item.getAttribute('data-image');
+//     backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+//     backgroundImageDiv.style.opacity = '1';
+
+//     // Add a mousemove listener to follow the cursor
+//     item.addEventListener('mousemove', (e) => {
+//       const rect = item.getBoundingClientRect();
+//       const offsetX = e.clientX - rect.left;
+//       const offsetY = e.clientY - rect.top;
+
+//       backgroundImageDiv.style.top = `${e.clientY}px`;
+//       backgroundImageDiv.style.left = `${e.clientX}px`;
+//       backgroundImageDiv.style.transform = 'translate(-50%, -50%)';
+//     });
+//   });
+
+//   item.addEventListener('mouseout', () => {
+//     backgroundImageDiv.style.opacity = '0';
+//   });
+// });
+// ==============================================================
+//     const backgroundImageDiv = document.getElementById('backgroundImage');
+
+// document.querySelectorAll('.heading-list li').forEach(item => {
+//   item.addEventListener('mouseover', (event) => {
+//     const imageSrc = item.getAttribute('data-image');
+//     backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+//     backgroundImageDiv.style.opacity = '1';
+
+//     // Add a mousemove listener to follow the cursor
+//     item.addEventListener('mousemove', (e) => {
+//       backgroundImageDiv.style.top = `${e.clientY}px`;
+//       backgroundImageDiv.style.left = `${e.clientX}px`;
+//     });
+//   });
+
+//   item.addEventListener('mouseout', () => {
+//     backgroundImageDiv.style.opacity = '0';
+//   });
+// });
+// =====================================================
+//     document.querySelectorAll('.heading-list li').forEach(item => {
+//       const backgroundImageDiv = document.getElementById('backgroundImage');
+//   item.addEventListener('mouseover', (event) => {
+//     const imageSrc = item.getAttribute('data-image');
+//     backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+//     backgroundImageDiv.style.opacity = '1';
+
+//     // Add a mousemove listener to follow the cursor within the heading
+//     item.addEventListener('mousemove', (e) => {
+//       const rect = item.getBoundingClientRect();
+//       const offsetX = e.clientX - rect.left;
+//       const offsetY = e.clientY - rect.top;
+
+//       backgroundImageDiv.style.top = `${offsetY - backgroundImageDiv.offsetHeight / 2}px`;
+//       backgroundImageDiv.style.left = `${offsetX - backgroundImageDiv.offsetWidth / 2}px`;
+//     });
+//   });
+
+//   item.addEventListener('mouseout', () => {
+//     backgroundImageDiv.style.opacity = '0';
+//   });
+
+
+// });
+
+//     function getCursor(event) {
+//     let x = event.clientX;
+//     let y = event.clientY;
+//     let _position = `X: ${x}<br>Y: ${y}`;
+
+//     const infoElement = document.getElementById('info');
+//     infoElement.innerHTML = _position;
+//     infoElement.style.top = y + "px";
+//     infoElement.style.left = (x + 20) + "px";
+// }
+
+
+
+
+
+
+
+    /////////////////////////////
+    document.querySelectorAll('.heading-list li').forEach(item => {
+  const backgroundImageDiv = document.getElementById('backgroundImage');
+  
+  // Handle mouseover event on each heading list item
+  item.addEventListener('mouseover', (event) => {
+    const imageSrc = item.getAttribute('data-image');
+    backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+    backgroundImageDiv.style.opacity = '1';
+
+    // Add a mousemove listener to move the background image div with the cursor
+    item.addEventListener('mousemove', (e) => {
+      // Get the cursor position relative to the viewport
+      const x = e.clientX;
+      const y = e.clientY;
+
+      // Position the backgroundImageDiv to match the cursor's position, centered
+      backgroundImageDiv.style.top = `${y - backgroundImageDiv.offsetHeight / 2}px`;
+      backgroundImageDiv.style.left = `${x - backgroundImageDiv.offsetWidth / 2}px`;
+    });
+  });
+
+  // Hide the background image div when the mouse leaves the heading list item
+  item.addEventListener('mouseout', () => {
+    backgroundImageDiv.style.opacity = '0';
+  });
+});
+
+// Function to display the cursor position (optional for debugging)
+// function getCursor(event) {
+//   let x = event.clientX;
+//   let y = event.clientY;
+//   let _position = `X: ${x}<br>Y: ${y}`;
+
+//   const infoElement = document.getElementById('info');
+//   infoElement.innerHTML = _position;
+//   infoElement.style.top = y + "px";
+//   infoElement.style.left = (x + 20) + "px";
+// }
+
+    ////////////////////////////////////////////////////////////
+// =======================================================
+//     const backgroundImageDiv = document.getElementById('backgroundImage');
+
+// document.querySelectorAll('.heading-list li').forEach(item => {
+//   item.addEventListener('mouseover', (event) => {
+//     const imageSrc = item.getAttribute('data-image');
+//     backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+//     backgroundImageDiv.style.opacity = '1';
+
+//     // Set the background image position relative to the current <li> item
+//     const rect = item.getBoundingClientRect();
+//     backgroundImageDiv.style.width = '200px';  // Set the image size
+//     backgroundImageDiv.style.height = '200px'; // Set the image size
+//     backgroundImageDiv.style.top = `${rect.top + window.scrollY}px`; // Account for scrolling
+//     backgroundImageDiv.style.left = `${rect.left + window.scrollX}px`; // Account for scrolling
+
+//     // Move the background image with the mouse cursor
+//     item.addEventListener('mousemove', (e) => {
+//       const offsetX = e.clientX - rect.left;
+//       const offsetY = e.clientY - rect.top;
+
+//       backgroundImageDiv.style.top = `${e.clientY - backgroundImageDiv.offsetHeight / 2}px`;
+//       backgroundImageDiv.style.left = `${e.clientX - backgroundImageDiv.offsetWidth / 2}px`;
+//     });
+//   });
+
+//   item.addEventListener('mouseout', () => {
+//     backgroundImageDiv.style.opacity = '0';
+//   });
+// });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hover Background Effect</title>
+  <style type="text/css">
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ccc;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      z-index: 0;
+    }
+
+    .list-holder {
+      position: relative;
+      top: 10%;
+    }
+
+    .heading-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .heading-list li {
+      font-size: 10rem;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .heading-list li:hover {
+      color: #fff;
+    }
+
+    /* The div that will display the background image */
+    .changeImg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;  /* Set to your desired image size */
+      height: calc(100vh);
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      pointer-events: none;  /* So it doesn't interfere with mouse events */
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Removed backgroundImageDiv and now the background is set in changeImg -->
+    <div class="changeImg" id="backgroundImage"></div>
+    <div class="list-holder">
+      <ul class="heading-list">
+        <li data-image="images/01.jpg">BRANDING</li>
+        <li data-image="images/02.jpg">UX/UI</li>
+        <li data-image="images/03.jpg">DIGITAL</li>
+        <li data-image="images/04.jpg">PRINT</li>
+        <li data-image="images/05.jpg">DESIGN</li>
+       
+
+       <!--  <li data-image="https://picsum.photos/id/13/1920/1080">BRANDING</li>
+        <li data-image="https://picsum.photos/id/14/1920/1080">UX/UI</li>
+        <li data-image="https://picsum.photos/id/15/1920/1080">DIGITAL</li>
+        <li data-image="https://picsum.photos/id/16/1920/1080">PRINT</li>
+        <li data-image="https://picsum.photos/id/17/1920/1080">DESIGN</li> -->
+      </ul>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    document.querySelectorAll('.heading-list li').forEach(item => {
+      const backgroundImageDiv = document.getElementById('backgroundImage');
+
+      // Handle mouseover event on each heading list item
+      item.addEventListener('mouseover', () => {
+        const imageSrc = item.getAttribute('data-image');
+        backgroundImageDiv.style.backgroundImage = `url(${imageSrc})`;
+        backgroundImageDiv.style.opacity = '1';
+      });
+
+      // Hide the background image div when the mouse leaves the heading list item
+      item.addEventListener('mouseout', () => {
+        backgroundImageDiv.style.opacity = '0';
+      });
+    });
+  </script>
+</body>
+</html>
